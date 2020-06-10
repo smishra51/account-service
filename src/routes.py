@@ -27,7 +27,7 @@ def add():
         db.session.add(newaccount)
         db.session.commit()
         return make_response(jsonify(data=[e.serialize() for e in Account.query.all()]), 200)
-    return make_response(jsonify({"resp":"Not found"}), 404)
+    return make_response(jsonify({"resp": "Not found"}), 404)
 
 
 @app.route("/account", methods=['GET'])
@@ -35,7 +35,7 @@ def get():
     data = Account.query.all()
     if data:
         return make_response(jsonify(data=[e.serialize() for e in Account.query.all()]), 200)
-    return make_response(jsonify({"resp":"Not found"}), 404)
+    return make_response(jsonify({"resp": "Not found"}), 404)
 
 
 @app.route("/account/<int:accountid>", methods=['GET'])
@@ -44,15 +44,15 @@ def findbyid(accountid):
         account = Account.query.filter(Account.accountId == accountid).first()
         if account:
             return make_response(jsonify(data=account.serialize()), 200)
-        return make_response(jsonify({"resp":"Not found"}), 404)
-    return make_response(jsonify({"resp":"Not found"}), 404)
+        return make_response(jsonify({"resp": "Not found"}), 404)
+    return make_response(jsonify({"resp": "Not found"}), 404)
 
 
 @app.route("/account", methods=['PUT'])
 def update():
-    account:Account = request.json
+    account: Account = request.json
     if account:
-        existing_account:Account = Account.query.filter(Account.accountId == account["accountId"]).first()
+        existing_account: Account = Account.query.filter(Account.accountId == account["accountId"]).first()
         if not existing_account:
             return make_response(jsonify({"username": account["name"]}), 404)
         existing_account.name = account["name"]
@@ -63,17 +63,17 @@ def update():
         db.session.add(existing_account)
         db.session.commit()
         return make_response(jsonify(data=existing_account.serialize()), 200)
-    return make_response(jsonify({"resp":"Not found"}), 404)
+    return make_response(jsonify({"resp": "Not found"}), 404)
+
 
 @app.route("/account", methods=['DELETE'])
 def delete():
-    account:Account = request.json
+    account: Account = request.json
     if account:
-        existing_account:Account = Account.query.filter(Account.accountId == account["accountId"]).first()
+        existing_account: Account = Account.query.filter(Account.accountId == account["accountId"]).first()
         if not existing_account:
             return make_response(jsonify({"accountId": account["accountId"]}), 404)
         db.session.delete(existing_account)
         db.session.commit()
         return make_response(jsonify({"resp": "Successfully deleted"}), 200)
-    return make_response(jsonify({"resp":"Not found"}), 404)
-
+    return make_response(jsonify({"resp": "Not found"}), 404)
