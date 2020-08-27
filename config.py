@@ -15,6 +15,6 @@ class Config:
     FLASK_DEBUG = 1
 
     # Database
-    SQLALCHEMY_DATABASE_URI ="postgresql://postgres:Hello12345+@database-1.clmqkhozzs3e.us-east-1.rds.amazonaws.com/postgres"
+    SQLALCHEMY_DATABASE_URI ="<>"
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
